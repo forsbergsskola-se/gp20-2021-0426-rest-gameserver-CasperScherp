@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>gp20_2021_0426_rest_gameserver_CasperScherp</RootNamespace>
+  </PropertyGroup>
+
+</Project>
