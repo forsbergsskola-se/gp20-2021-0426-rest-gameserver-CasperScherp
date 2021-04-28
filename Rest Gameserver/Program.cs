@@ -1,35 +1,24 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
 namespace gp20_2021_0426_rest_gameserver_CasperScherp
 {
-    public class Program : TcpClient
+    public class Program
     {
         static void Main(string[] args)
         {
-        var endpoint = new IPEndPoint(IPAddress.Loopback, 7777);
-        {
-            var tcpListener = new TcpListener(endpoint);
-            tcpListener.Start();
+            var tcpClient = new TcpClient("acme.com",80);
+            var stream = tcpClient.GetStream();
+            var bytes = Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost: acme.com\r\n\r\n");
+            //var streamWriter = new StreamWriter(tcpClient.GetStream());
+            //streamWriter.Write();
+            var streamReader = new StreamReader(tcpClient.GetStream());
+            var result = streamReader.ReadToEnd();
+            Console.WriteLine(result);
 
-            while (true) {
-                var tcpClient = tcpListener.AcceptTcpClient();
-                byte[] buffer = new byte[100];
-                var responseBuffer = Encoding.ASCII.GetBytes("Hey");
-                Console.WriteLine("Update"+Encoding.ASCII.GetString(buffer));
-                tcpClient.GetStream().Write(responseBuffer, 0, responseBuffer.Length);
-                tcpClient.GetStream().Read(buffer, 0,100);
-                
-                
-                
-                
-                
-                
-                
-                tcpClient.Close();
-            }
         }
         
         
@@ -39,4 +28,4 @@ namespace gp20_2021_0426_rest_gameserver_CasperScherp
             
         }
     }
-}
+
