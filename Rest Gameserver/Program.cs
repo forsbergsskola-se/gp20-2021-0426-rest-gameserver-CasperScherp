@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 namespace gp20_2021_0426_rest_gameserver_CasperScherp
 {
@@ -15,7 +16,14 @@ namespace gp20_2021_0426_rest_gameserver_CasperScherp
 
             while (true) {
                 var tcpClient = tcpListener.AcceptTcpClient();
-                tcpClient.GetStream();
+                byte[] buffer = new byte[100];
+                var responseBuffer = Encoding.ASCII.GetBytes("Hey");
+                Console.WriteLine("Update"+Encoding.ASCII.GetString(buffer));
+                tcpClient.GetStream().Write(responseBuffer, 0, responseBuffer.Length);
+                tcpClient.GetStream().Read(buffer, 0,100);
+                
+                
+                
                 
                 
                 
